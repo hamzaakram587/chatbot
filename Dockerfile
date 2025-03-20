@@ -1,14 +1,17 @@
-# 1️⃣ Use Python 3.10 as the base image
+# Use the official Python image
 FROM python:3.10
 
-# 2️⃣ Set the working directory inside the container
+# Set the working directory in the container
 WORKDIR /app
 
-# 3️⃣ Copy all project files into the container
+# Copy everything from the local directory into the container
 COPY . .
 
-# 4️⃣ Install dependencies from requirements.txt (without cache to reduce size)
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 5️⃣ Set the command to start your FastAPI or Flask app
+# Expose port 8000 (for FastAPI/Flask)
+EXPOSE 8000
+
+# Start the FastAPI/Flask server
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
